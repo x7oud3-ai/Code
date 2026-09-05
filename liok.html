@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:responsive='true' dir='rtl' lang='ar' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+    <meta charset='UTF-8'/>
+    <meta content='width=device-width, initial-scale=1.0, viewport-fit=cover' name='viewport'/>
+    <title><data:blog.pageTitle/></title>
+    <meta content='#111216' name='theme-color'/>
+    
+    <script src='https://cdn.tailwindcss.com'/>
+    <link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;family=Tajawal:wght@400;500;700&amp;family=Poppins:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700;800&amp;family=Fira+Code:wght@400;500&amp;display=swap' rel='stylesheet'/>
+    
+    <b:skin><![CDATA[
+        /* تنسيقات مدونة بلوجر الإلزامية */
+        * { -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif; }
+        .font-mono-brand { font-family: 'Fira Code', monospace; }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Slim, readable scrollbar for code / modal panels */
+        .thin-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+        .thin-scroll::-webkit-scrollbar-track { background: transparent; }
+        .thin-scroll::-webkit-scrollbar-thumb { background: #2a2c35; border-radius: 999px; }
+        .thin-scroll::-webkit-scrollbar-thumb:hover { background: #3a3d49; }
+
+        @keyframes pulse-soft { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+        .skeleton { animation: pulse-soft 1.6s ease-in-out infinite; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+        }
+
+        button:focus-visible, a:focus-visible {
+            outline: 2px solid #6366f1;
+            outline-offset: 2px;
+        }
+    ]]></b:skin>
+</head>
+<body class='bg-[#111216] text-[#E4E6EB] min-h-screen selection:bg-indigo-500/30'>
+
+    <!-- قسم مخفي لتلبية شروط محرك بلوجر البرمجية -->
+    <b:section class='hidden' id='main-blogger-section' showaddelement='false'/>
+
+    <!-- الصفحة الرئيسية للتطبيق -->
+    <div class='view-section' id='main-view'>
+        <header class='sticky top-0 z-30 py-3 sm:py-4 border-b border-slate-800/60 bg-[#111216]/90 backdrop-blur-md'>
+            <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center gap-3'>
+                <span class='text-xl sm:text-2xl font-black text-white tracking-wider font-mono-brand cursor-pointer shrink-0' onclick='navigateToHome()'>CodeX</span>
+                <button class='text-[11px] sm:text-xs font-semibold text-slate-400 hover:text-white bg-[#16171D] border border-slate-800/80 px-3 sm:px-4 py-2 rounded-xl transition-all duration-300 hover:border-slate-700 whitespace-nowrap' onclick='openPrivacyModal()'>
+                    سياسة الخصوصية
+                </button>
+            </div>
+        </header>
+
+        <section class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6'>
+            <div class='flex gap-2 overflow-x-auto no-scrollbar pb-1 -mx-1 px-1' id='categories-container'>
+                <button class='category-btn shrink-0 bg-indigo-600 text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition' data-category='all' onclick='filterComponents(&quot;all&quot;)'>الكل</button>
+                <button class='category-btn shrink-0 bg-[#1A1C23] border border-slate-800 text-slate-400 hover:text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition' data-category='Button' onclick='filterComponents(&quot;Button&quot;)'>أزرار</button>
+                <button class='category-btn shrink-0 bg-[#1A1C23] border border-slate-800 text-slate-400 hover:text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition' data-category='Card' onclick='filterComponents(&quot;Card&quot;)'>بطاقات</button>
+                <button class='category-btn shrink-0 bg-[#1A1C23] border border-slate-800 text-slate-400 hover:text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition' data-category='Checkbox' onclick='filterComponents(&quot;Checkbox&quot;)'>مربعات اختيار</button>
+                <button class='category-btn shrink-0 bg-[#1A1C23] border border-slate-800 text-slate-400 hover:text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition' data-category='Input' onclick='filterComponents(&quot;Input&quot;)'>حقول إدخال</button>
+                <button class='category-btn shrink-0 bg-[#1A1C23] border border-slate-800 text-slate-400 hover:text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition' data-category='Loader' onclick='filterComponents(&quot;Loader&quot;)'>مؤشرات تحميل</button>
+                <button class='category-btn shrink-0 bg-[#1A1C23] border border-slate-800 text-slate-400 hover:text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition' data-category='Radio' onclick='filterComponents(&quot;Radio&quot;)'>أزرار اختيار</button>
+                <button class='category-btn shrink-0 bg-[#1A1C23] border border-slate-800 text-slate-400 hover:text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition' data-category='Switch' onclick='filterComponents(&quot;Switch&quot;)'>مفاتيح تبديل</button>
+                <button class='category-btn shrink-0 bg-[#1A1C23] border border-slate-800 text-slate-400 hover:text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition' data-category='Tooltip' onclick='filterComponents(&quot;Tooltip&quot;)'>تلميحات</button>
+                <button class='category-btn shrink-0 bg-[#1A1C23] border border-slate-800 text-slate-400 hover:text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition' data-category='UI Extended' onclick='filterComponents(&quot;UI Extended&quot;)'>عناصر إضافية</button>
+            </div>
+        </section>
+
+        <section class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 pb-16'>
+            <div class='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6' id='components-grid'>
+            </div>
+        </section>
+    </div>
+
+    <!-- صفحة عرض العنصر والأكواد -->
+    <div class='view-section hidden min-h-screen flex flex-col' id='project-view'>
+        <header class='py-3 sm:py-4 border-b border-slate-800/60 bg-[#111216] sticky top-0 z-30'>
+            <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center gap-3'>
+                <div class='flex items-center gap-2 sm:gap-3 min-w-0'>
+                    <button class='shrink-0 text-slate-400 hover:text-white text-xs flex items-center gap-1 bg-[#16171D] border border-slate-800 px-3 py-2 rounded-lg transition' onclick='navigateToHome()'>
+                        <span>&#8594;</span> <span class='hidden sm:inline'>العودة للرئيسية</span>
+                    </button>
+                    <h3 class='text-xs sm:text-sm font-bold text-white truncate' id='page-category'>اسم القسم</h3>
+                </div>
+                <span class='text-xl sm:text-2xl font-black text-white tracking-wider font-mono-brand cursor-pointer shrink-0' onclick='navigateToHome()'>CodeX</span>
+            </div>
+        </header>
+
+        <div class='flex-1 grid grid-cols-1 lg:grid-cols-2 overflow-hidden' style='direction: ltr;'>
+            <div class='min-h-[42vh] lg:min-h-0 flex items-center justify-center overflow-auto relative p-4 sm:p-6 transition-colors duration-300' id='live-preview-bg'>
+                <div class='w-full h-full flex justify-center items-center' id='live-preview-box'/>
+            </div>
+
+            <div class='bg-[#111216] border-t lg:border-t-0 lg:border-l border-slate-800 flex flex-col min-h-0'>
+                <div class='flex border-b border-slate-800/80 bg-[#16171D] px-3 sm:px-4 gap-1 overflow-x-auto no-scrollbar'>
+                    <button class='shrink-0 px-3 sm:px-4 py-3 text-xs font-bold border-b-2 border-indigo-500 text-white transition' id='tab-html-btn' onclick='switchCodeTab(&quot;html&quot;)'>HTML</button>
+                    <button class='shrink-0 px-3 sm:px-4 py-3 text-xs font-semibold text-slate-400 hover:text-white transition' id='tab-css-btn' onclick='switchCodeTab(&quot;css&quot;)'>CSS</button>
+                    <button class='shrink-0 px-3 sm:px-4 py-3 text-xs font-semibold text-slate-400 hover:text-white transition hidden' id='tab-js-btn' onclick='switchCodeTab(&quot;js&quot;)'>JS</button>
+                </div>
+
+                <div class='flex justify-between items-center bg-[#111216] px-3 sm:px-4 py-2.5 border-b border-slate-800/50'>
+                    <span class='text-[10px] text-slate-500 font-mono tracking-wider' id='code-type-label'>كود HTML</span>
+                    <button class='bg-[#1A1C23] border border-slate-800 hover:bg-indigo-600 hover:text-white text-slate-300 text-xs px-3 sm:px-4 py-1.5 rounded-lg transition-all flex items-center gap-1.5' id='copy-btn' onclick='copyCurrentCode()'>
+                        <span>📋</span> <span class='hidden xs:inline sm:inline'>نسخ الكود</span>
+                    </button>
+                </div>
+
+                <pre class='flex-1 p-4 sm:p-5 overflow-auto text-left bg-[#0D0E12] thin-scroll min-h-[35vh]'><code class='text-[11px] sm:text-xs font-mono text-emerald-400 whitespace-pre-wrap break-words' id='modal-code'/></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة سياسة الخصوصية المنبثقة -->
+    <div class='fixed inset-0 bg-black/80 flex items-center justify-center p-4 hidden z-50 backdrop-blur-sm' id='privacy-modal'>
+        <div class='bg-[#16171D] border border-slate-800/80 rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden shadow-2xl'>
+            <div class='p-4 sm:p-5 border-b border-slate-800/80 flex justify-between items-center bg-[#111216]'>
+                <h3 class='text-sm sm:text-md font-bold text-white flex items-center gap-2'>
+                    <span>🛡&#65039;</span> سياسة الخصوصية لـ CodeX
+                </h3>
+                <button aria-label='إغلاق' class='text-slate-400 hover:text-white text-xl leading-none transition' onclick='closePrivacyModal()'>
+                    &#215;
+                </button>
+            </div>
+            <div class='p-5 sm:p-6 overflow-y-auto thin-scroll space-y-4 text-slate-300 text-sm leading-relaxed'>
+                <p>مرحب&#1611;ا بك في موقع <strong>CodeX</strong>. خصوصيتك تهمنا&#1548; ونسعى دائم&#1611;ا لتوفير بيئة تصفح آمنة ومريحة لجميع زوارنا ومطورينا.</p>
+            </div>
+            <div class='p-4 border-t border-slate-800/80 bg-[#111216] flex justify-end'>
+                <button class='bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-6 py-2.5 rounded-lg font-bold transition-all' onclick='closePrivacyModal()'>
+                    موافق ومتابعة التصفح
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- كود الجافاسكريبت و Firebase داخل CDATA -->
+    <script type='module'>
+        //<![CDATA[
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC229nsYy9leoR9nh_Ehai_216X1bUPFbs",
+            authDomain: "studio-2342835081-4fd5b.firebaseapp.com",
+            projectId: "studio-2342835081-4fd5b",
+            storageBucket: "studio-2342835081-4fd5b.firebasestorage.app",
+            messagingSenderId: "331082025852",
+            appId: "1:331082025852:web:d24f1068950c7192a8b2f9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let allComponents = [];
+        let activeComponent = null;
+        let activeTab = 'html';
+
+        const categoryLabels = {
+            'Button': 'أزرار',
+            'Card': 'بطاقات',
+            'Checkbox': 'مربعات اختيار',
+            'Input': 'حقول إدخال',
+            'Loader': 'مؤشرات تحميل',
+            'Radio': 'أزرار اختيار',
+            'Switch': 'مفاتيح تبديل',
+            'Tooltip': 'تلميحات',
+            'UI Extended': 'عناصر إضافية'
+        };
+
+        function getCategoryLabel(cat) {
+            return categoryLabels[cat] || cat || '';
+        }
+
+        function renderSkeletons(count = 6) {
+            const grid = document.getElementById('components-grid');
+            let html = '';
+            for (let i = 0; i < count; i++) {
+                html += `
+                    <div class="skeleton bg-[#16171D] border border-slate-800/80 rounded-2xl overflow-hidden">
+                        <div class="h-[220px] bg-[#1A1C23]"></div>
+                        <div class="p-4 flex justify-between items-center">
+                            <div class="h-4 w-16 bg-[#1A1C23] rounded"></div>
+                            <div class="h-7 w-20 bg-[#1A1C23] rounded-xl"></div>
+                        </div>
+                    </div>
+                `;
+            }
+            grid.innerHTML = html;
+        }
+
+        function showFriendlyErrorMessage() {
+            const grid = document.getElementById('components-grid');
+            grid.innerHTML = `
+                <div class="col-span-full text-center py-14 sm:py-16 px-5 sm:px-6 bg-[#16171D] border border-slate-800/80 rounded-2xl max-w-xl mx-auto my-8 shadow-xl">
+                    <div class="text-indigo-500 text-4xl mb-4">🔄</div>
+                    <h4 class="text-white font-bold text-sm sm:text-base mb-2">عذرًا، قد يكون هناك ضغط كبير على الموقع حاليًا</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed mb-6 max-w-md mx-auto">
+                        يبدو أن خوادمنا تستقبل الكثير من الطلبات في الوقت الحالي. نرجو منكم الانتظار قليلاً أو محاولة تحديث الصفحة.
+                    </p>
+                    <button id="retry-btn" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-6 py-3 rounded-xl transition-all duration-300 shadow-md flex items-center gap-2 mx-auto">
+                        🔄 تحديث الصفحة بالكامل
+                    </button>
+                </div>
+            `;
+            document.getElementById('retry-btn').addEventListener('click', () => {
+                window.location.reload();
+            });
+        }
+
+        function showEmptyCategoryMessage() {
+            const grid = document.getElementById('components-grid');
+            grid.innerHTML = `
+                <div class="col-span-full text-center py-14 sm:py-16 px-5 sm:px-6 bg-[#16171D] border border-slate-800/80 rounded-2xl max-w-xl mx-auto my-8">
+                    <div class="text-slate-600 text-4xl mb-4">🗂️</div>
+                    <h4 class="text-white font-bold text-sm sm:text-base mb-2">لا توجد عناصر في هذا القسم بعد</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">جرّب اختيار قسم آخر من القائمة أعلاه.</p>
+                </div>
+            `;
+        }
+
+        async function fetchComponents() {
+            renderSkeletons();
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "components"));
+                allComponents = [];
+                querySnapshot.forEach((doc) => {
+                    allComponents.push({ id: doc.id, ...doc.data() });
+                });
+
+                if (allComponents.length === 0) {
+                    showFriendlyErrorMessage();
+                } else {
+                    displayComponents(allComponents);
+                    route();
+                }
+
+            } catch (error) {
+                console.error(error);
+                showFriendlyErrorMessage();
+            }
+        }
+
+        function processCSS(cssCode) {
+            if (!cssCode) return '';
+            let processed = cssCode.replace(/(?<![\w-])body(?![\w-])/g, '.shadow-body');
+            processed = processed.replace(/background-clip:\s*text;/g, 'background-clip: text; -webkit-background-clip: text;');
+            return `
+                @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+                :host {
+                    --main-size: 4em;
+                    --text-color: #000000;
+                    --shine-color: rgba(255, 255, 255, 0.25);
+                    --shadow-color: #aaaaaa;
+                    font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+                }
+                ${processed}
+            `;
+        }
+
+        function displayComponents(data) {
+            const grid = document.getElementById('components-grid');
+            grid.innerHTML = '';
+
+            if (data.length === 0) {
+                showEmptyCategoryMessage();
+                return;
+            }
+
+            data.forEach((comp) => {
+                const card = document.createElement('div');
+                card.className = "group bg-[#16171D] border border-slate-800/80 rounded-2xl overflow-hidden hover:border-slate-700 transition-all duration-300 flex flex-col justify-between";
+
+                const componentBgColor = comp.bgColor || '#EAEAEA';
+                const previewWrapper = document.createElement('div');
+                previewWrapper.className = "min-h-[200px] sm:min-h-[220px] max-h-[260px] flex items-stretch justify-stretch relative overflow-hidden";
+                previewWrapper.style.backgroundColor = componentBgColor;
+
+                const previewContainer = document.createElement('div');
+                previewContainer.className = "relative z-10 w-full flex";
+
+                const shadow = previewContainer.attachShadow({ mode: 'open' });
+                const userCSS = processCSS(comp.cssCode);
+
+                shadow.innerHTML = `
+                    <style>
+                        :host { width: 100%; display: flex; }
+                        .shadow-body {
+                            width: 100%;
+                            min-height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            box-sizing: border-box;
+                            transition: all 0.3s ease;
+                        }
+                        ${userCSS}
+                    </style>
+                    <div class="shadow-body">
+                        ${comp.htmlCode || ''}
+                    </div>
+                `;
+
+                previewWrapper.appendChild(previewContainer);
+                card.appendChild(previewWrapper);
+
+                const footer = document.createElement('div');
+                footer.className = "p-3 sm:p-4 flex justify-between items-center bg-[#16171D] gap-2";
+                footer.innerHTML = `
+                    <div class="min-w-0">
+                        <span class="inline-block bg-[#111216] border border-slate-800 text-indigo-400 text-[10px] px-2.5 py-1 rounded font-semibold truncate max-w-full">${getCategoryLabel(comp.category)}</span>
+                    </div>
+                    <button class="get-code-btn shrink-0 bg-[#111216] border border-slate-800 hover:bg-indigo-600 text-indigo-300 hover:text-white text-[11px] px-3.5 py-2 rounded-xl font-bold transition-all duration-300">&lt;/&gt; عرض الكود</button>
+                `;
+
+                card.appendChild(footer);
+
+                if (comp.jsCode && comp.jsCode.trim() !== '') {
+                    const script = document.createElement('script');
+                    script.textContent = `try { ${comp.jsCode} } catch(e) { console.error(e); }`;
+                    shadow.appendChild(script);
+                }
+
+                const originalIndex = allComponents.indexOf(comp);
+                const getCodeBtn = card.querySelector('.get-code-btn');
+
+                const categoryEncoded = encodeURIComponent(comp.category);
+                const numId = comp.numId !== undefined ? comp.numId : originalIndex;
+                const projectUrl = `?page=project&category=${categoryEncoded}&id=${numId}`;
+
+                let pressTimer;
+
+                const openInNewTab = () => {
+                    window.open(projectUrl, '_blank');
+                };
+
+                const openInSamePage = () => {
+                    window.history.pushState({}, '', projectUrl);
+                    route();
+                };
+
+                getCodeBtn.addEventListener('mousedown', (e) => {
+                    if (e.button === 0) {
+                        pressTimer = setTimeout(() => {
+                            openInNewTab();
+                            getCodeBtn.dataset.longPressed = "true";
+                        }, 600);
+                    }
+                });
+
+                getCodeBtn.addEventListener('mouseup', () => {
+                    clearTimeout(pressTimer);
+                });
+
+                getCodeBtn.addEventListener('mouseleave', () => {
+                    clearTimeout(pressTimer);
+                });
+
+                getCodeBtn.addEventListener('touchstart', () => {
+                    pressTimer = setTimeout(() => {
+                        openInNewTab();
+                        getCodeBtn.dataset.longPressed = "true";
+                    }, 600);
+                }, { passive: true });
+
+                getCodeBtn.addEventListener('touchend', () => {
+                    clearTimeout(pressTimer);
+                });
+
+                getCodeBtn.addEventListener('click', (e) => {
+                    if (getCodeBtn.dataset.longPressed === "true") {
+                        delete getCodeBtn.dataset.longPressed;
+                        return;
+                    }
+
+                    if (e.ctrlKey || e.metaKey) {
+                        openInNewTab();
+                    } else {
+                        openInSamePage();
+                    }
+                });
+
+                grid.appendChild(card);
+            });
+        }
+
+        function setActiveCategoryButton(categoryValue) {
+            const target = (categoryValue || 'all').toLowerCase();
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                const isActive = (btn.dataset.category || '').toLowerCase() === target;
+                btn.className = isActive
+                    ? "category-btn shrink-0 bg-indigo-600 text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition"
+                    : "category-btn shrink-0 bg-[#1A1C23] border border-slate-800 text-slate-400 hover:text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition";
+            });
+        }
+
+        window.filterComponents = function(category) {
+            setActiveCategoryButton(category);
+
+            if (category === 'all') {
+                window.history.pushState({}, '', window.location.pathname);
+                if (allComponents.length === 0) {
+                    showFriendlyErrorMessage();
+                } else {
+                    displayComponents(allComponents);
+                }
+            } else {
+                window.history.pushState({}, '', `?category=${encodeURIComponent(category)}`);
+                const filtered = allComponents.filter(c => c.category === category);
+                displayComponents(filtered);
+            }
+        };
+
+        function showProjectPage(comp) {
+            activeComponent = comp;
+            document.getElementById('page-category').innerText = getCategoryLabel(comp.category);
+
+            const liveBox = document.getElementById('live-preview-box');
+
+            const livePreviewBg = document.getElementById('live-preview-bg');
+            if (livePreviewBg) {
+                livePreviewBg.style.backgroundColor = comp.bgColor || '#EAEAEA';
+            }
+
+            liveBox.innerHTML = '';
+            const shadowHost = document.createElement('div');
+            shadowHost.className = "w-full h-full flex justify-center items-center";
+            liveBox.appendChild(shadowHost);
+
+            const shadow = shadowHost.attachShadow({ mode: 'open' });
+            const userCSS = processCSS(comp.cssCode);
+
+            shadow.innerHTML = `
+                <style>
+                    :host { width: 100%; height: 100%; display: flex; }
+                    .shadow-body {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        box-sizing: border-box;
+                    }
+                    ${userCSS}
+                </style>
+                <div class="shadow-body">
+                    ${comp.htmlCode || ''}
+                </div>
+            `;
+
+            if (comp.jsCode && comp.jsCode.trim() !== '') {
+                const script = document.createElement('script');
+                script.textContent = `try { ${comp.jsCode} } catch(e) { console.error(e); }`;
+                shadow.appendChild(script);
+            }
+
+            const jsTabBtn = document.getElementById('tab-js-btn');
+            if (comp.jsCode && typeof comp.jsCode === 'string' && comp.jsCode.trim() !== "") {
+                jsTabBtn.classList.remove('hidden');
+            } else {
+                jsTabBtn.classList.add('hidden');
+            }
+
+            switchCodeTab('html');
+
+            document.getElementById('main-view').classList.add('hidden');
+            document.getElementById('project-view').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        window.switchCodeTab = function(tab) {
+            activeTab = tab;
+            const htmlBtn = document.getElementById('tab-html-btn');
+            const cssBtn = document.getElementById('tab-css-btn');
+            const jsBtn = document.getElementById('tab-js-btn');
+            const codeBox = document.getElementById('modal-code');
+            const label = document.getElementById('code-type-label');
+
+            [htmlBtn, cssBtn, jsBtn].forEach(btn => {
+                btn.classList.remove('border-b-2', 'border-indigo-500', 'text-white', 'font-bold');
+                btn.classList.add('text-slate-400', 'font-semibold');
+            });
+
+            if (tab === 'html') {
+                htmlBtn.classList.add('border-b-2', 'border-indigo-500', 'text-white', 'font-bold');
+                htmlBtn.classList.remove('text-slate-400', 'font-semibold');
+                codeBox.textContent = activeComponent.htmlCode || '';
+                label.innerText = 'كود HTML';
+            } else if (tab === 'css') {
+                cssBtn.classList.add('border-b-2', 'border-indigo-500', 'text-white', 'font-bold');
+                cssBtn.classList.remove('text-slate-400', 'font-semibold');
+                codeBox.textContent = activeComponent.cssCode || '/* لا يوجد كود CSS مخصص */';
+                label.innerText = 'كود CSS';
+            } else if (tab === 'js') {
+                jsBtn.classList.add('border-b-2', 'border-indigo-500', 'text-white', 'font-bold');
+                jsBtn.classList.remove('text-slate-400', 'font-semibold');
+                codeBox.textContent = activeComponent.jsCode || '';
+                label.innerText = 'كود JS';
+            }
+        };
+
+        window.navigateToHome = function() {
+            window.history.pushState({}, '', window.location.pathname);
+            route();
+        };
+
+        window.copyCurrentCode = function() {
+            let codeToCopy = '';
+            if (activeTab === 'html') codeToCopy = activeComponent.htmlCode;
+            else if (activeTab === 'css') codeToCopy = activeComponent.cssCode;
+            else if (activeTab === 'js') codeToCopy = activeComponent.jsCode;
+
+            navigator.clipboard.writeText(codeToCopy || '').then(() => {
+                const copyBtn = document.getElementById('copy-btn');
+                copyBtn.innerHTML = "<span>✓</span> <span class='hidden xs:inline sm:inline'>تم النسخ!</span>";
+                setTimeout(() => copyBtn.innerHTML = "<span>📋</span> <span class='hidden xs:inline sm:inline'>نسخ الكود</span>", 2000);
+            });
+        };
+
+        function route() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const page = urlParams.get('page');
+            const category = urlParams.get('category');
+            const id = urlParams.get('id');
+
+            if (page === 'project' && category && id) {
+                const targetComp = allComponents.find((comp, index) => {
+                    const compId = comp.numId !== undefined ? comp.numId.toString() : index.toString();
+                    return comp.category.toLowerCase() === category.toLowerCase() && compId === id;
+                });
+
+                if (targetComp) {
+                    showProjectPage(targetComp);
+                    return;
+                }
+            }
+
+            if (category && !page) {
+                const filtered = allComponents.filter(c => c.category.toLowerCase() === category.toLowerCase());
+                displayComponents(filtered);
+                setActiveCategoryButton(category);
+            } else {
+                displayComponents(allComponents);
+                setActiveCategoryButton('all');
+            }
+
+            document.getElementById('project-view').classList.add('hidden');
+            document.getElementById('main-view').classList.remove('hidden');
+        }
+
+        window.addEventListener('popstate', route);
+
+        window.openPrivacyModal = function() {
+            document.getElementById('privacy-modal').classList.remove('hidden');
+        };
+
+        window.closePrivacyModal = function() {
+            document.getElementById('privacy-modal').classList.add('hidden');
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchComponents();
+        });
+        //]]>
+    </script>
+</body>
+</html>
